@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("question")
@@ -27,5 +28,11 @@ public class QuestionsController
     public List<Questions> getQuestionsByDomain(@PathVariable String domain)
     {
         return questionsService.getQuestionsByDomain(domain);
+    }
+
+    @GetMapping(value="/getQuestionsById/{id}")
+    public Optional<Questions> getQuestionsById(@PathVariable Integer id)
+    {
+        return questionsService.getQuestionsById(id);
     }
 }
