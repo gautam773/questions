@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class QuestionsService {
@@ -20,5 +21,9 @@ public class QuestionsService {
 
     public List<Questions> getQuestionsByDomain(String domain) {
         return questionsDAO.findByDomain(domain);
+    }
+
+    public Optional<Questions> getQuestionsById(Integer id) {
+        return  questionsDAO.findById(id);
     }
 }
