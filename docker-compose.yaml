@@ -1,0 +1,35 @@
+#####docker-compose.yml#####
+version: '3'
+
+services:
+  db:
+    image: postgres
+    container_name: Questions
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    volumes:
+      - "./postgres/data:/var/lib/postgresql/data"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: postgres
+    networks:
+      - product-net
+
+  product:
+    image: questions
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    networks:
+      - product-net
+
+networks:
+  product-net:
+    driver: bridge
+volumes:
+  db:
+    driver: local
